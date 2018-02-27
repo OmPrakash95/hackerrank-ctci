@@ -5,7 +5,8 @@
 using namespace std;
 
 stack <int> s;
-{[(])}
+//{{[[(())]]}}
+
 
 
 bool is_balanced(string expression) {
@@ -14,23 +15,26 @@ bool is_balanced(string expression) {
     		s.push(0);
     	else if(expression[i] == ')'){
     		if(s.empty())return false;
-    		if(s.top() == 0)d.pop();
+    		if(s.top() == 0)s.pop();
     	}
     	else if(expression[i] == '[')
     		s.push(1);
     	else if(expression[i] == ']'){
     		if(s.empty())return false;
-    		if(s.top() == 1)d.pop();
+    		if(s.top() == 1)s.pop();
     	}
     	else if(expression[i] == '{')
     		s.push(2);
     	else if(expression[i] == '}'){
     		if(s.empty())return false;
-    		if(s.top() == 2)d.pop();
+    		if(s.top() == 2)s.pop();
     	}    	    	
     }
-    if(s.empty())return true;
-    return false;
+   	if(s.empty())return true;
+   	while (!s.empty()) {
+      s.pop();
+   	}        
+   	return false;
 }
 
 int main(){
