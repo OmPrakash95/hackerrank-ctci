@@ -1,11 +1,11 @@
 #include<bits/stdc++.h>
+#include<iomanip>
 
 using namespace std;
 
-float findMedian(int k, float m, priority_queue <int, vector<int>, less<int> > l, priority_queue <int, vector<int>, greater<int> > r){
+float findMedian(int k, float m, priority_queue <int, vector<int>, less<int> > &l, priority_queue <int, vector<int>, greater<int> > &r){
 
 	if(l.size() > r.size()){
-		cout<<"Left greater than right"<<" M="<<m<<endl;
 		if(k<(int)m){
 			r.push(l.top());
 			l.pop();
@@ -14,11 +14,10 @@ float findMedian(int k, float m, priority_queue <int, vector<int>, less<int> > l
 		else{
 			r.push(k);
 		}
-		m = (l.top()+r.top())/2.0;
+		m = (float)((l.top()+r.top())/2.0);
 		return m;			
 	}
 	if(l.size() == r.size()){
-		cout<<"Left equal to right"<<" M="<<m<<endl;
 		if(k<(int)m){
 			l.push(k);
 			m = (float)l.top();	
@@ -30,8 +29,7 @@ float findMedian(int k, float m, priority_queue <int, vector<int>, less<int> > l
 		return m;			
 	}
 	if(l.size() < r.size()){
-		cout<<"Left less than right"<<" M="<<m<<endl;
-		if(k < (int)m){
+		if((float)k < m){
 			l.push(k);
 		}
 		else{
@@ -39,24 +37,30 @@ float findMedian(int k, float m, priority_queue <int, vector<int>, less<int> > l
 			r.pop();
 			r.push(k);
 		}
-		m = (l.top() + r.top())/2.0;
+		m = (float)((l.top() + r.top())/2.0);
 		return m;
 	}
 }
+
 int main(){
     int n;
     cin >> n;
     vector<int> a(n);
-    
+    vector<float> med(n);
+
     priority_queue <int, vector<int>, greater<int> > right;
     priority_queue <int, vector<int>, less<int> > left;
     float m = 0.0;
 
     for(int a_i = 0;a_i < n;a_i++){
        cin >> a[a_i];
-
-       cout<<findMedian(a[a_i], m, left, right)<<endl;
+       m = findMedian(a[a_i], m, left, right);
+       med[a_i] = m;
     }
+
+    for(int a_i = 0;a_i < n;a_i++){
+    	cout<<std::fixed<<setprecision(1)<<med[a_i]<<endl;
+    }    
 
     return 0;
 }
