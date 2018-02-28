@@ -4,10 +4,10 @@
 using namespace std;
 
 long long make_change(vector<int> coins, int money) {
-	int def = 0;
-	int** a = new int*[coins.size()+1];
+
+	long** a = new long*[coins.size()+1];
 	for(int i = 0; i < coins.size()+1; ++i)
-	    a[i] = new int[money+1];
+	    a[i] = new long[money+1];
 
 	for(int i = 0; i < coins.size()+1 ; i++){
 		for(int j = 0; j<= money ; j++)
@@ -23,11 +23,11 @@ long long make_change(vector<int> coins, int money) {
 		}
 		//cout<<endl;
 	}
-	int result = a[coins.size()+1][money+1];
-	cout<<result;
-	return 0;
+	long long result = a[coins.size()][money];
+	delete a;
+	return result;
 }
-//construct 0th row
+
 int main(){
     int n;
     int m;
