@@ -16,18 +16,21 @@ bool is_balanced(string expression) {
     	else if(expression[i] == ')'){
     		if(s.empty())return false;
     		if(s.top() == 0)s.pop();
+            else return false;
     	}
     	else if(expression[i] == '[')
     		s.push(1);
     	else if(expression[i] == ']'){
     		if(s.empty())return false;
     		if(s.top() == 1)s.pop();
+            else return false;
     	}
     	else if(expression[i] == '{')
     		s.push(2);
     	else if(expression[i] == '}'){
     		if(s.empty())return false;
     		if(s.top() == 2)s.pop();
+            else return false;
     	}    	    	
     }
    	if(s.empty())return true;
